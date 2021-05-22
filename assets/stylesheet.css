@@ -1,0 +1,18 @@
+#high-score {
+  margin-top: 50px;
+  margin-left: 40px;
+  font-size: 30px;
+}
+#title {
+  text-align: center;
+}
+.score {
+  font-size: 30px;
+}
+main {
+  text-align: center;
+}
+#container {
+  flex-direction: column;
+  display: list-item;
+}
