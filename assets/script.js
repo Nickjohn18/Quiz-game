@@ -65,24 +65,24 @@ function displayQuestion() {
 
 function compareAnswer(e) {
     console.log(e.target.textContent)
+    var numChoices = questions[currentQuestions].choices;
+
     
     var rightAnswer = questions[currentQuestions].answer;
     if(e.target.textContent == rightAnswer) {
         document.body.style.background = "#008000";
         clearColor();
         score++; 
-        console.log(newContent);
     } else {
         timeLeft = timeLeft - timeDeduct;
         document.body.style.background = "#ff0000";
         clearColor();
         score--;
-     console.log(newContent)
     }
-    
-    if (currentQuestions >= questions.length){
+
+    if (currentQuestions > numChoices.length) {
         endGame();
-        newContent.textContent = "End Of quiz!"
+        clearInterval(timerCountDown);
     }else {
         displayQuestion();
     }
@@ -97,6 +97,10 @@ function clearColor() {
 function endGame() {
     currentTime.innerHTML = "";
     container.innerHTML = "";
+
+    var newContent = document.createElement("p");
+        newContent.textContent = "End Of quiz!";
+        container.appendChild(newContent);
 }
 
 
