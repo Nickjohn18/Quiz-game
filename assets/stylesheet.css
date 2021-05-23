@@ -3,6 +3,10 @@
   margin-left: 40px;
   font-size: 30px;
 }
+#timer {
+  text-align: end;
+  font-size: 20px;
+}
 #title {
   text-align: center;
 }
@@ -11,8 +15,8 @@
 }
 main {
   text-align: center;
+  background-color: gr;
 }
 #container {
-  flex-direction: column;
-  display: list-item;
+  justify-content: space-between;
 }
