@@ -36,7 +36,6 @@ start.addEventListener("click", function() {
             }
         }, 1000);
     }
-    loadTask();
     displayQuestion();
 })
 
@@ -156,6 +155,5 @@ function endGame() {
             window.location.replace("./highscores.html")
         }
     })
-    // This is for the HighScorePage!
     
 }
