@@ -14,7 +14,6 @@ var container = document.getElementById("container")
 var quiz = document.getElementById("quiz");
 var currentTime = document.getElementById("timer")
 var content = document.getElementById("content")
-var keepScores = document.getElementById("keepScores");
 
 var questions = [
     {question:'What does "www" stand for in a website?', choices:["World Wide Web","World War West", "We Were Where"], answer:'World Wide Web'},
@@ -152,23 +151,28 @@ function endGame() {
             var savedScore = JSON.stringify(totalScore);
             localStorage.setItem("totalScore", savedScore);
 
-            window.location.replace("./assets/highscores.html")
+            window.location.replace("./highscores.html")
         }
     })
 }
 
 // This is for the HighScorePage!
 var loadTasks = function() {
-var getScore = localStorage.getItem("totalScore");
-
-if(getScore !== null){
-
-for(var i = 0; i < getScore.length; i++) {
-    var newLine = document.createElement("li");
-    newLine.textContent = getScore[i].initials + " " + getScore[i].score;
-    keepScores.appendChild(newLine);
-
+    var keepScores = document.getElementById("keepScores");
+    var getScore = localStorage.getItem("totalScore");
+    getScore = JSON.parse(getScore)
+    
+    
+    if(getScore !== null){
+    
+    for(var i = 0; i < getScore.length; i++) {
+        var newLine = document.createElement("li");
+        newLine.textContent = getScore[i].name + " " + getScore[i].score;
+        keepScores.appendChild(newLine);
+        
+    }
 }
 }
-}
+
+loadTasks()
 

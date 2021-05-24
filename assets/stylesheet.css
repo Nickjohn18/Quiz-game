@@ -1,6 +1,4 @@
 #high-score {
-  margin-top: 50px;
-  margin-left: 40px;
   font-size: 30px;
 }
 #timer {
@@ -22,3 +20,7 @@ main {
 }
 
 /* HighScore Page */
+
+#go-back {
+  font-size: 30px;
+}
