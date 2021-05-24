@@ -152,7 +152,7 @@ function endGame() {
             var savedScore = JSON.stringify(totalScore);
             localStorage.setItem("totalScore", savedScore);
             
-            window.location.replace("./highscores.html")
+            window.location.replace("./assets/highscores.html")
         }
     })
     
