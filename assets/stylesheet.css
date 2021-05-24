@@ -24,3 +24,7 @@ main {
 #go-back {
   font-size: 30px;
 }
+#keepScores {
+  list-style-type: none;
+  font-size: 20px;
+}

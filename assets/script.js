@@ -36,7 +36,8 @@ start.addEventListener("click", function() {
             }
         }, 1000);
     }
-    displayQuestion()
+    loadTask();
+    displayQuestion();
 })
 
 
@@ -132,9 +133,10 @@ function endGame() {
     newButton.textContent = "Submit";
     container.appendChild(newButton);
 
+    
     newButton.addEventListener("click", function () {
         var name = newInput.value;
-
+        
         // not working
         if(null) {
             console.log("no value entered!")
@@ -150,29 +152,10 @@ function endGame() {
             totalScore.push(finalScore);
             var savedScore = JSON.stringify(totalScore);
             localStorage.setItem("totalScore", savedScore);
-
+            
             window.location.replace("./highscores.html")
         }
     })
-}
-
-// This is for the HighScorePage!
-var loadTasks = function() {
-    var keepScores = document.getElementById("keepScores");
-    var getScore = localStorage.getItem("totalScore");
-    getScore = JSON.parse(getScore)
+    // This is for the HighScorePage!
     
-    
-    if(getScore !== null){
-    
-    for(var i = 0; i < getScore.length; i++) {
-        var newLine = document.createElement("li");
-        newLine.textContent = getScore[i].name + " " + getScore[i].score;
-        keepScores.appendChild(newLine);
-        
-    }
 }
-}
-
-loadTasks()
-
