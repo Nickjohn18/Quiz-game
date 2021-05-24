@@ -6,8 +6,8 @@
 
 var score = 0;
 var timerCountDown = 0;
-var timeLeft = 80;
-var timeDeduct = 10;
+var timeLeft = 51;
+var timeDeduct = 8;
 var currentQuestions = 0
 var start = document.getElementById("start")
 var container = document.getElementById("container")
@@ -18,7 +18,7 @@ var content = document.getElementById("content")
 var questions = [
     {question:'What does "www" stand for in a website?', choices:["World Wide Web","World War West", "We Were Where"], answer:'World Wide Web'},
     {question:'Who was elected President of the United States in 2017?', choices:["George Bush","Donald Trump", "Barack Obama"], answer:'Donald Trump'},
-    {question:'How many colors in the Rainbow?', choices:["One","Five", "Seven"], answer:'Seven'},
+    {question:'How many colors are in the Rainbow?', choices:["One","Five", "Seven"], answer:'Seven'},
     {question:'What is the currency of the UK?', choices:["Pound","Euro", "Dollar"], answer:'Pound'},
     {question:'What is a tomato?', choices:["Fruit","Vegetable", "Herb"], answer:'Fruit'},
 ];
@@ -36,15 +36,24 @@ start.addEventListener("click", function() {
             }
         }, 1000);
     }
-displayQuestion()
+    displayQuestion()
 })
 
 
- 
+
 function displayQuestion() {
-    content.innerHTML = "";
+    // Stop the array from looping without no value
+    // messy code but working on it
+    var numChoices = questions[currentQuestions].choices;
+    if (currentQuestions >> numChoices.length) {
+        endGame();
+    }
+    
     // container.innerHTML clears the current question
+    content.innerHTML = "";
     container.innerHTML = "";
+    
+    //loop the choices instead of questions... 
     var current = questions[currentQuestions];
     var listQuestion = document.createElement("h1");
     listQuestion.textContent = current.question;
@@ -61,33 +70,28 @@ function displayQuestion() {
             displayQuestion();
         })
     }
-}
+    }
 
 function compareAnswer(e) {
     console.log(e.target.textContent)
     var numChoices = questions[currentQuestions].choices;
-
     
     var rightAnswer = questions[currentQuestions].answer;
     if(e.target.textContent == rightAnswer) {
         document.body.style.background = "#008000";
         clearColor();
-        score++; 
+        score += 10; 
     } else {
         timeLeft = timeLeft - timeDeduct;
         document.body.style.background = "#ff0000";
         clearColor();
-        score--;
     }
 
     if (currentQuestions > numChoices.length) {
         endGame();
-        clearInterval(timerCountDown);
-    }else {
-        displayQuestion();
     }
     console.log(score)
-
+    
 }
 function clearColor() {
     setTimeout(function() {
@@ -97,10 +101,49 @@ function clearColor() {
 function endGame() {
     currentTime.innerHTML = "";
     container.innerHTML = "";
+    clearInterval(timerCountDown);
 
-    var newContent = document.createElement("p");
-        newContent.textContent = "End Of quiz!";
-        container.appendChild(newContent);
+
+    var newContent = document.createElement("h3");
+    newContent.textContent = "End of quiz! Thank you for playing my quiz game.";
+    container.appendChild(newContent);
+
+    //name of the user
+    var newLabel = document.createElement("label");
+    newLabel.textContent = "Enter your initials: ";
+    container.appendChild(newLabel);
+    
+    //input
+    var newInput = document.createElement("input");
+    newInput.setAttribute("type", "text");
+    newInput.textContent = "";
+    container.appendChild(newInput);
+
+    //submit button
+    var newButton = document.createElement("button");
+    newButton.setAttribute("type", "submit");
+    newButton.textContent = "Submit";
+    container.appendChild(newButton);
+
+    newButton.addEventListener("click", function () {
+        var name = newInput.value;
+
+        if(null) {
+            console.log("no value entered!")
+        }else {
+            var finalScore = {name, score};
+            console.log(finalScore);
+            var totalScore = localStorage.getItem("totalScore");
+            if(totalScore === null){
+                totalScore = [];
+            } else {
+                totalScore = JSON.parse(totalScore);
+            }
+            totalScore.push(finalScore);
+            var savedScore = JSON.stringify(totalScore);
+            localStorage.setItem("totalScore", savedScore);         
+        }
+    })
 }
 
 
